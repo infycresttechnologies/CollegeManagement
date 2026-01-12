@@ -1,2 +1,0 @@
-# CollegeManagement
-Authior Krushil Shah
