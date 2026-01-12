@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Confirmation | Airline Reservation System</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background-color: #f4f6fb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #333;
+    }
+
+    .confirmation-container {
+      background: #fff;
+      width: 480px;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .success-icon {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background-color: #16a34a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto 25px;
+      animation: pop 0.5s ease;
+    }
+
+    @keyframes pop {
+      0% {transform: scale(0.5); opacity: 0.3;}
+      100% {transform: scale(1); opacity: 1;}
+    }
+
+    .success-icon svg {
+      width: 50px;
+      height: 50px;
+      stroke: #fff;
+      stroke-width: 3;
+      fill: none;
+    }
+
+    h1 {
+      color: #16a34a;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #555;
+      font-size: 17px;
+      margin-bottom: 20px;
+    }
+
+    .info-box {
+      background: #f9fafc;
+      border: 1px solid #e5e7eb;
+      padding: 15px 20px;
+      border-radius: 12px;
+      text-align: left;
+      margin-bottom: 25px;
+    }
+
+    .info-box p {
+      margin: 6px 0;
+      font-size: 15px;
+      color: #444;
+    }
+
+    .info-box strong {
+      color: #1e3a8a;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      background: linear-gradient(135deg, #2563eb, #1e40af);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, #1e40af, #2563eb);
+    }
+
+    footer {
+      position: fixed;
+      bottom: 10px;
+      text-align: center;
+      width: 100%;
+      font-size: 13px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="confirmation-container">
+    <div class="success-icon">
+      <svg viewBox="0 0 52 52">
+        <path d="M14 27l7 7 17-17"></path>
+      </svg>
+    </div>
+
+    <h1>Payment Successful!</h1>
+    <p>Thank you for booking your flight with us.</p>
+
+    <div class="info-box">
+      <p><strong>Booking ID:</strong> #AR<span id="bookingId"></span></p>
+      <p><strong>Payment Method:</strong> <span id="paymentMode"></span></p>
+      <p><strong>Amount Paid:</strong> ₹<span id="paymentAmount"></span></p>
+      <p><strong>Date:</strong> <span id="todayDate"></span></p>
+    </div>
+
+    <p>We’ve sent your e-ticket and booking details to your registered email.</p>
+
+    <a href="janviii.html" class="btn">🏠 Go to Home</a>
+  </div>
+
+  <footer>© 2025 Airline Reservation System | All Rights Reserved</footer>
+
+  <script>
+    // Run script only after page fully loaded
+    document.addEventListener("DOMContentLoaded", function() {
+      // Get stored data
+      const amount = localStorage.getItem("paymentAmount");
+      const mode = localStorage.getItem("paymentMode");
+
+      // Set payment details
+      document.getElementById("paymentAmount").textContent = amount || "0.00";
+      document.getElementById("paymentMode").textContent = mode || "N/A";
+      document.getElementById("bookingId").textContent = Math.floor(100000 + Math.random() * 900000);
+
+      // Show today's real date
+      const today = new Date();
+      const options = { day: "numeric", month: "long", year: "numeric" };
+      const formattedDate = today.toLocaleDateString("en-IN", options);
+      document.getElementById("todayDate").textContent = formattedDate;
+
+      // Clear localStorage after displaying
+      localStorage.removeItem("paymentAmount");
+      localStorage.removeItem("paymentMode");
+    });
+  </script>
+</body>
+</html>

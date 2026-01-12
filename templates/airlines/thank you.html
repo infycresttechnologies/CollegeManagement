@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You | Airlines Reservation System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to bottom right, #eaf4ff, #ffffff); /* Same as home page */
+      color: #001f4d;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .confirmation-box {
+      background: rgba(255, 255, 255, 0.85);
+      padding: 55px 65px;
+      border-radius: 25px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(12px);
+      max-width: 600px;
+      width: 90%;
+      animation: fadeIn 1s ease forwards;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .confirmation-box i {
+      font-size: 80px;
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+
+    .confirmation-box h2 {
+      font-size: 2.1em;
+      color: #004aad;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .confirmation-box p {
+      font-size: 1.1em;
+      color: #333;
+      margin-bottom: 35px;
+      line-height: 1.7;
+    }
+
+    .highlight {
+      color: #007bff;
+      font-weight: 600;
+    }
+
+    .back-btn {
+      background: linear-gradient(to right, #0056d2, #007bff);
+      border: none;
+      color: white;
+      padding: 14px 40px;
+      border-radius: 50px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+
+    .back-btn:hover {
+      background: linear-gradient(to right, #0043b5, #0062d9);
+      transform: scale(1.07);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    }
+
+    footer {
+      text-align: center;
+      color: #555;
+      margin-top: 50px;
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 768px) {
+      .confirmation-box 
+	  {
+        padding: 40px 25px;
+      }
+      .confirmation-box h2 {
+        font-size: 1.7em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="confirmation-box">
+    <i class="fa-solid fa-circle-check"></i>
+    <h2>Thank You!</h2>
+    <p>
+      Your request has been received successfully.<br>
+      Experience the elegance of travel — where every journey begins with excellence.
+    </p>
+    <button class="back-btn" onclick="window.location.href='janvi13.html'">
+      <i class="fa-solid fa-house"></i> Back to Home
+    </button>
+  </div>
+
+  <footer>
+    © 2025 Airlines Reservation System.
+  </footer>
+
+</body>
+</html>

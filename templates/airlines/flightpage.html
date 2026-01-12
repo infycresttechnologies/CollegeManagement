@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flight Booking | Airlines Reservation System</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  body {
+    background: linear-gradient(to bottom right, #eaf4ff, #ffffff);
+    color: #fff;
+    min-height: 100vh;
+  }
+
+  header {
+    background: linear-gradient(120deg, #0044cc, #007bff);
+    color: white;
+    padding: 18px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 60, 0.6);
+    backdrop-filter: blur(6px);
+    position: relative;
+    z-index: 2;
+  }
+
+  header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+  }
+
+  nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: 0.3s;
+  }
+
+  nav ul li a:hover {
+    color: #4fc3f7;
+  }
+
+  /* Booking Form */
+  .booking-section {
+    max-width: 950px;
+    background: rgba(255, 255, 255, 0.95);
+    margin: 60px auto;
+    padding: 40px 50px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  .booking-section h2 {
+    text-align: center;
+    color: #003c9d;
+    margin-bottom: 30px;
+    font-size: 2em;
+  }
+
+  .booking-form label {
+    font-weight: 600;
+    color: #003366;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .booking-form input,
+  .booking-form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 1em;
+    background-color: #f9fbff;
+    transition: 0.3s ease;
+  }
+
+  .booking-form input:focus,
+  .booking-form select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0,123,255,0.4);
+    outline: none;
+  }
+
+  .booking-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .btn-container {
+    text-align: center;
+    margin-top: 25px;
+  }
+
+  .book-btn {
+    background: linear-gradient(to right, #0044cc, #007bff);
+    border: none;
+    color: white;
+    padding: 14px 40px;
+    border-radius: 50px;
+    font-size: 1.1em;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  .book-btn:hover {
+    background: linear-gradient(to right, #0033aa, #0056cc);
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+
+  footer {
+    background: rgba(0, 0, 60, 0.8);
+    text-align: center;
+    padding: 20px;
+    color: #fff;
+    font-size: 15px;
+    backdrop-filter: blur(5px);
+    margin-top: 60px;
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (max-width: 768px) {
+    .search-box {
+      flex-direction: column;
+      width: 90%;
+    }
+    .search-box input, .search-box select {
+      width: 100%;
+      margin: 8px 0;
+    }
+    .flight-card {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+<section class="booking-section">
+  <h2>Book Your Flight ✈️</h2>
+  <form class="booking-form" onsubmit="return confirmBooking()">
+
+    <div class="booking-grid">
+      <div>
+        <label for="from">From</label>
+        <input list="airport-list" id="from" name="from" placeholder="Enter Departure City" required>
+      </div>
+      <div>
+        <label for="to">To</label>
+        <input list="airport-list" id="to" name="to" placeholder="Enter Destination City" required>
+      </div>
+
+      <!-- Real airport list -->
+      <datalist id="airport-list">
+        <option value="New York (JFK) - John F. Kennedy International Airport">
+        <option value="Los Angeles (LAX) - Los Angeles International Airport">
+        <option value="London (LHR) - Heathrow Airport">
+        <option value="Paris (CDG) - Charles de Gaulle Airport">
+        <option value="Tokyo (HND) - Haneda Airport">
+        <option value="Dubai (DXB) - Dubai International Airport">
+        <option value="Singapore (SIN) - Changi Airport">
+        <option value="Sydney (SYD) - Kingsford Smith Airport">
+        <option value="Toronto (YYZ) - Pearson International Airport">
+        <option value="Delhi (DEL) - Indira Gandhi International Airport">
+        <option value="Mumbai (BOM) - Chhatrapati Shivaji Maharaj International Airport">
+        <option value="Bangalore (BLR) - Kempegowda International Airport">
+        <option value="Doha (DOH) - Hamad International Airport">
+        <option value="Istanbul (IST) - Istanbul Airport">
+        <option value="Frankfurt (FRA) - Frankfurt Airport">
+        <option value="San Francisco (SFO) - San Francisco International Airport">
+        <option value="Chicago (ORD) - O'Hare International Airport">
+        <option value="Hong Kong (HKG) - Hong Kong International Airport">
+        <option value="Bangkok (BKK) - Suvarnabhumi Airport">
+        <option value="Kuala Lumpur (KUL) - Kuala Lumpur International Airport">
+      </datalist>
+
+      <div>
+        <label for="depart">Departure Date</label>
+        <input type="date" id="depart" name="depart" required>
+      </div>
+      <div>
+        <label for="return">Return Date</label>
+        <input type="date" id="return" name="return">
+      </div>
+      <div>
+        <label for="passengers">Passengers</label>
+        <select id="passengers" name="passengers" required>
+          <option value="">Select</option>
+          <option>1 Passenger</option>
+          <option>2 Passengers</option>
+          <option>3 Passengers</option>
+          <option>4+ Passengers</option>
+        </select>
+      </div>
+      <div>
+        <label for="class">Class</label>
+        <select id="class" name="class" required>
+          <option value="">Select</option>
+          <option>Economy</option>
+          <option>Business</option>
+          <option>First Class</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="btn-container">
+      <button type="submit" class="book-btn">Book Flight</button>
+    </div>
+  </form>
+</section>
+
+<footer>
+  © 2025 Airlines Reservation System.
+</footer>
+
+<script>
+  // Set real-time minimum and default date for departure & return
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+  const currentDate = `${yyyy}-${mm}-${dd}`;
+
+  const departInput = document.getElementById("depart");
+  const returnInput = document.getElementById("return");
+
+  // Set today's date as default and min date
+  departInput.min = currentDate;
+  departInput.value = currentDate;
+  returnInput.min = currentDate;
+
+  // Update return date min dynamically when departure date changes
+  departInput.addEventListener("change", () => {
+    returnInput.min = departInput.value;
+  });
+
+  function confirmBooking() {
+    const from = document.getElementById("from").value;
+    const to = document.getElementById("to").value;
+    const depart = document.getElementById("depart").value;
+    const ret = document.getElementById("return").value;
+    const passengers = document.getElementById("passengers").value;
+    const travelClass = document.getElementById("class").value;
+
+    let message = "✈️ Flight Booking Details:\\n\\n";
+    message += "From: " + from + "\\n";
+    message += "To: " + to + "\\n";
+    message += "Departure Date: " + depart + "\\n";
+    message += ret ? "Return Date: " + ret + "\\n" : "";
+    message += "Passengers: " + passengers + "\\n";
+    message += "Class: " + travelClass + "\\n\\n";
+    message += "✅ Your flight has been booked successfully!";
+
+    alert(message);
+    window.location.href = "janviii.html"; // redirect
+    return false;
+  }
+</script>
+
+
+
+</body>
+</html>

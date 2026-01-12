@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manage Booking</title>
+<style>
+body{
+  font-family:'Segoe UI',sans-serif;background:#f7fafc;
+  display:flex;justify-content:center;padding-top:50px;
+}
+.table-container{
+  background:#fff;padding:25px;border-radius:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);width:85%;
+}
+h2{text-align:center;color:#1e3c72;}
+table{width:100%;border-collapse:collapse;}
+th,td{padding:12px;border:1px solid #ddd;text-align:center;}
+th{background:#2a5298;color:#fff;}
+tr:nth-child(even){background:#f4f4f4;}
+.btn{padding:6px 12px;border:none;border-radius:6px;color:#fff;cursor:pointer;}
+.edit{background:#1e3c72;} .cancel{background:#d9534f;}
+</style>
+</head>
+<body>
+<div class="table-container">
+  <h2>Manage Bookings</h2>
+  <table>
+    <tr><th>Booking ID</th><th>User</th><th>Flight</th><th>Status</th><th>Action</th></tr>
+    <tr><td>101</td><td>John</td><td>AI-203</td><td>Confirmed</td>
+      <td><button class="btn edit">Update</button> <button class="btn cancel">Cancel</button></td></tr>
+    <tr><td>102</td><td>Priya</td><td>EA-406</td><td>Pending</td>
+      <td><button class="btn edit">Update</button> <button class="btn cancel">Cancel</button></td></tr>
+  </table>
+</div>
+</body>
+</html>

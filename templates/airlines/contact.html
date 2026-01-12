@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us | Airlines Reservation System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-container {
+            width: 90%;
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px;
+            color: #fff;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .contact-header h1 {
+            font-size: 36px;
+            font-weight: 600;
+        }
+
+        .contact-header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .info-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .info-box i {
+            font-size: 22px;
+            color: #ffd700;
+        }
+
+        .info-box div h4 {
+            font-size: 18px;
+        }
+
+        .info-box div p {
+            font-size: 14px;
+            opacity: 0.85;
+        }
+
+        .contact-form {
+            background: rgba(255,255,255,0.15);
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .contact-form h3 {
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: none;
+            outline: none;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .contact-form textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 30px;
+            background: #ffd700;
+            color: #1e3c72;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .contact-form button:hover {
+            background: #ffcc00;
+        }
+
+        @media (max-width: 768px) {
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="contact-container">
+
+    <div class="contact-header">
+        <h1>Contact Airlines Reservation System ✈️</h1>
+        <p>We’re here to help you with bookings, support, and inquiries</p>
+    </div>
+
+    <div class="contact-content">
+
+        <!-- Contact Information -->
+        <div class="contact-info">
+
+            <div class="info-box">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                    <h4>Office Address</h4>
+                    <p>Mumbai International Airport, India</p>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <i class="fas fa-phone-alt"></i>
+                <div>
+                    <h4>Phone</h4>
+                    <p>+91 98765 43210</p>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <i class="fas fa-envelope"></i>
+                <div>
+                    <h4>Email</h4>
+                    <p>support@airlinesreservationsystem.com</p>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <i class="fas fa-clock"></i>
+                <div>
+                    <h4>Working Hours</h4>
+                    <p>24 x 7 Customer Support</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form">
+            <h3>Send us a message</h3>
+            <form onsubmit="event.preventDefault(); window.location.href='file:///C:/Users/Dell/Desktop/Project/thank%20you.html';">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <input type="text" placeholder="Subject">
+                <textarea placeholder="Your Message"></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

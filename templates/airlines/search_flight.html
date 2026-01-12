@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Flights</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #e3f2fd, #ffffff);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #003366;
+            /* Dark Blue */
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 24px;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .container {
+            max-width: 1100px;
+            background: #fff;
+            margin: 40px auto;
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            flex-grow: 1;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        form input,
+        form select,
+        form button {
+            width: 48%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        form input[type="date"] {
+            cursor: pointer;
+        }
+
+        form button {
+            background-color: #003366;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        form button:hover {
+            background-color: #002244;
+            /* Even darker on hover */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 12px;
+        }
+
+        th {
+            background-color: #003366;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .price {
+            color: #008000;
+            font-weight: 600;
+        }
+
+        .booked {
+            color: red;
+            font-weight: bold;
+        }
+
+        .available {
+            color: green;
+            font-weight: bold;
+        }
+
+        .note {
+            margin-top: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        footer {
+            background-color: #003366;
+            /* Dark Blue */
+            color: white;
+            text-align: center;
+            padding: 12px 0;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header
+        style="display: flex; justify-content: space-between; align-items: center; padding: 10px 40px; background-color: #003366;">
+        <div style="font-size: 24px; font-weight: bold;">Search Flights</div>
+        <nav>
+            <a href="{% url 'home' %}"
+                style="color: white; text-decoration: none; margin-left: 20px; font-size: 16px;">Home</a>
+            <a href="{% url 'search_flights' %}"
+                style="color: white; text-decoration: none; margin-left: 20px; font-size: 16px;">Flights</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}"
+                style="color: white; text-decoration: none; margin-left: 20px; font-size: 16px;">Logout</a>
+            {% else %}
+            <a href="{% url 'customer_login' %}"
+                style="color: white; text-decoration: none; margin-left: 20px; font-size: 16px;">Login</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Find Your Flight</h2>
+
+        <form id="flightForm" action="{% url 'search_flights' %}" method="POST">
+            {% csrf_token %}
+            <select id="from" name="from" required>
+                <option value="">From (Select City)</option>
+                {% for source in sources %}
+                <option value="{{ source }}">{{ source }}</option>
+                {% endfor %}
+            </select>
+
+            <select id="to" name="to" required>
+                <option value="">To (Select Destination)</option>
+                {% for dest in destinations %}
+                <option value="{{ dest }}">{{ dest }}</option>
+                {% endfor %}
+            </select>
+
+            <input type="date" id="date" name="date" required>
+            <select id="passengers" name="passengers" required>
+                <option value="1">1 Adult</option>
+                <option value="2">2 Adults</option>
+                <option value="3">3 Adults</option>
+                <option value="4">4 Adults</option>
+            </select>
+            <button type="submit">🔍 Search Flights</button>
+        </form>
+
+        <div id="results">
+            {% if flights %}
+            <h3>Search Results</h3>
+            <table>
+                <tr>
+                    <th>Flight No.</th>
+                    <th>Destination</th>
+                    <th>Departure Time</th>
+                    <th>Price (₹)</th>
+                    <th>Available Seats</th>
+                    <th>Action</th>
+                </tr>
+                {% for flight in flights %}
+                <tr>
+                    <td>{{ flight.flight_number }}</td>
+                    <td>{{ flight.destination }}</td>
+                    <td>{{ flight.departure_time|date:"D d M Y H:i" }}</td>
+                    <td class="price">{{ flight.price }}</td>
+                    <td class="available">{{ flight.available_seats }}</td>
+                    <td><a href="{% url 'booking' flight.id %}"><button
+                                style="width: auto; padding: 5px 10px;">Book</button></a></td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <p style="text-align:center;">No flights found. Please try different search criteria.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <footer>
+        © 2026 Airlines Reservation System | Designed with ✈️ and Passion
+    </footer>
+
+    <script>
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        const minDate = `${yyyy}-${mm}-${dd}`;
+        document.getElementById("date").value = minDate;
+        document.getElementById("date").setAttribute("min", minDate);
+    </script>
+
+</body>
+
+</html>

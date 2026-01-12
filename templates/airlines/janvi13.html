@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Airlines Reservation System</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  * {margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+  font-family: 'Poppins', sans-serif;
+  }
+  body {
+    background: url("C:/Users/Dell/Pictures/airline.jpg") no-repeat center center/cover;
+    background-attachment: fixed; 
+	color: #fff; position: relative;
+  }
+  body::before {
+    content: ""; 
+	position: absolute; 
+	top: 0; 
+	left: 0;
+    width: 100%; height: 100%; 
+	background: rgba(0,0,0,0.45); z-index: 0;
+  }
+  header {
+    display: flex; 
+	justify-content: space-between; 
+	align-items: center;
+    padding: 18px 60px; 
+	background: rgba(0,0,60,0.6); 
+	backdrop-filter: blur(6px);
+    position: sticky; 
+	top: 0; 
+	z-index: 1000;
+  }
+  header h1 {
+  font-size: 26px; 
+  font-weight: 700; 
+  color: #ffcc00;
+  }
+  nav ul {
+  list-style: none; 
+  display: flex; 
+  gap: 25px;
+  }
+  nav ul li a {
+  text-decoration: none; 
+  color: #fff; 
+  font-weight: 500; 
+  transition: 0.3s;
+  }
+  nav ul li a:hover {
+  color: #4fc3f7;
+  }
+
+  .hero {
+  text-align: center; 
+  margin-top: 8%; 
+  position: relative; 
+  z-index: 2;
+  }
+  .hero h1 {
+  font-size: 50px; 
+  font-weight: 700; 
+  color: #fff;
+  }
+  .hero h1 span {
+  color: #00bfff;
+  }
+  .hero p {
+  font-size: 18px; 
+  margin: 20px auto; 
+  max-width: 700px; 
+  line-height: 1.6;
+  }
+  .hero-buttons {
+  margin-top: 25px;
+  }
+  .hero-buttons a button {
+    padding: 12px 30px; 
+	border: none; 
+	border-radius: 25px; 
+	background-color: #007bff;
+    color: white; 
+	margin: 10px; cursor: pointer; 
+	font-size: 16px; 
+	transition: 0.3s; 
+	font-weight: 600;
+  }
+  .hero-buttons a button:hover {
+  background-color: #0056b3;
+  }
+  .hero-buttons a .outline {
+  background-color: transparent; 
+  border: 2px solid #fff;
+  }
+
+  .search-box {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px; 
+	width: 75%; 
+	margin: 60px auto 20px;
+    border-radius: 16px; 
+	display: flex; 
+	justify-content: space-between; 
+	align-items: center;
+    flex-wrap: wrap; 
+	position: relative; 
+	z-index: 2; 
+	box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+  .trip-options {
+  width: 100%; 
+  display: flex; 
+  justify-content: center; 
+  gap: 40px; 
+  margin-bottom: 20px; 
+  color: #001f8a; font-weight: 600;
+  }
+  .trip-options label {
+  display: flex; 
+  align-items: center;
+  gap: 8px; 
+  cursor: pointer; 
+  font-size: 16px;
+  }
+  .trip-options input[type="radio"] {
+  accent-color: #007bff; 
+  width: 18px; 
+  height: 18px; 
+  cursor: pointer;
+  }
+  .search-box input, .search-box select {
+    width: 22%; 
+	padding: 12px; border: 1px solid #ccc; 
+	border-radius: 10px; font-size: 16px; margin: 5px 0;
+  }
+  .search-box input[type="date"] {
+  cursor: pointer;
+  }
+  .search-box button {
+    background: linear-gradient(135deg, #0044cc, #007bff); 
+	color: white; border: none;
+    padding: 13px 28px; 
+	border-radius: 10px; font-size: 16px; 
+	cursor: pointer;
+    width: 100%; 
+	margin-top: 15px; 
+	transition: 0.3s; font-weight: 600;
+  }
+  .search-box button:hover {
+  background: linear-gradient(135deg, #0033aa, #0056cc);
+  }
+  .results {
+  margin-top: 40px; 
+  max-width: 950px; 
+  margin-left: auto; margin-right: auto; 
+  display: none; 
+  z-index: 2; 
+  position: relative;
+  }
+  .flight-card {
+    background: rgba(255,255,255,0.95); 
+	color: #000; 
+	border-radius: 14px;
+    padding: 25px 20px; 
+	margin: 15px 0; 
+	display: flex; 
+	justify-content: space-between;
+    align-items: center;
+	box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  }
+  .flight-info h3 {
+  margin: 0; 
+  color: #0041d1; 
+  font-size: 20px;
+  }
+  .flight-info p {
+  margin: 4px 0 0;
+  color: #555;
+  }
+  .price {
+  font-size: 22px; 
+  font-weight: 700; 
+  color: #007bff;
+  }
+  .book-btn {
+    background: #001f8a; 
+	color: #fff; 
+	border: none; 
+	border-radius: 8px;
+    padding: 10px 22px; 
+	font-weight: 600; 
+	cursor: pointer; 
+	transition: 0.3s;
+  }
+  .book-btn:hover {
+  background: #0041d1;
+  }
+  footer {
+    background: rgba(0,0,60,0.8); 
+	text-align: center; 
+	padding: 20px;
+    color: #fff; 
+	font-size: 15px; 
+	backdrop-filter: blur(5px);
+    margin-top: 60px; 
+	position: relative; 
+	z-index: 2;
+  }
+  @media (max-width: 768px) {
+    .search-box {flex-direction: column; width: 90%;
+	}
+    .search-box input, .search-box select {
+	width: 100%; 
+	margin: 8px 0;
+	}
+    .flight-card {
+	flex-direction: column; 
+	text-align: center;
+	}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><i class="fa-solid fa-plane-departure"></i> Airlines Reservation System</h1>
+  <nav>
+    <ul>
+      <li><a href="C:/Users/Dell/Desktop/Project/janviii.html">Home</a></li>
+      <li><a href="C:\Users\Dell\Desktop\Project\search flight.html">Flights</a></li>
+      <li><a href="C:/Users/Dell/Desktop/Project/destinations.html">Destinations</a></li>
+      <li><a href="C:/Users/Dell/Desktop/Project/contact us.html">Contact</a></li>
+	  <li><a href="C:\Users\Dell\Desktop\Project\about.html">About Us</a></li>
+      <li><a href="C:/Users/Dell/Desktop/Project/LOGIN.html">Login</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Book Your <span>Dream Flight</span> Today</h1>
+  <p>Discover breathtaking destinations around the world. Affordable tickets, secure booking, and 24/7 support — with AirFly, you’re always ready for takeoff!</p>
+   <div class="hero-buttons">
+    <a href="C:\Users\Dell\Desktop\Project\booking.html"><button>Book Now</button></a>
+    <a href="C:\Users\Dell\Desktop\Project\learn more.html"><button class="outline">Learn More</button></a>
+  </div>
+</section>
+
+<div class="search-box">
+  <div class="trip-options">
+    <label><input type="radio" name="trip" checked> Return</label>
+    <label><input type="radio" name="trip"> One Way</label>
+  </div>
+  
+  <select id="from">
+    <option value="">From</option>
+    <option>Delhi (DEL) – Indira Gandhi International Airport</option>
+    <option>Mumbai (BOM) – Chhatrapati Shivaji Maharaj International Airport</option>
+    <option>Bangalore (BLR) – Kempegowda International Airport</option>
+    <option>Chennai (MAA) – Chennai International Airport</option>
+    <option>Hyderabad (HYD) – Rajiv Gandhi International Airport</option>
+  </select>
+  
+  <select id="to">
+    <option value="">To</option>
+    <option>Maldives (MLE) – Velana International Airport</option>
+    <option>New York (JFK) – John F. Kennedy International Airport</option>
+    <option>Tokyo (HND) – Tokyo Haneda International Airport</option>
+    <option>Dubai (DXB) – Dubai International Airport</option>
+    <option>Singapore (SIN) – Changi International Airport</option>
+    <option>London (LHR) – Heathrow Airport</option>
+    <option>Sydney (SYD) – Kingsford Smith Airport</option>
+    <option>Bali (DPS) – Ngurah Rai International Airport</option>
+  </select>
+
+  <input type="date" id="date" required>
+  
+  <select id="passengers">
+    <option>1 Passenger</option>
+    <option>2 Passengers</option>
+    <option>3 Passengers</option>
+    <option>4 Passengers</option>
+  </select>
+  
+  <button onclick="searchFlights()">Search Flights</button>
+</div>
+
+<div class="results" id="results"></div>
+
+<footer>© 2026 Airlines Reservation System</footer>
+
+<script>
+// ✅ Set today’s date and disable past dates
+const dateInput = document.getElementById("date");
+const today = new Date();
+const yyyy = today.getFullYear();
+const mm = String(today.getMonth() + 1).padStart(2, '0');
+const dd = String(today.getDate()).padStart(2, '0');
+const minDate = `${yyyy}-${mm}-${dd}`;
+dateInput.value = minDate;
+dateInput.setAttribute("min", minDate);
+
+// ✅ Destination Data (with airport, price & flights)
+const destinations = {
+  "Maldives (MLE) – Velana International Airport": {
+    price: 45000,
+    flights: [
+      { name: "Air India 204", time: "08:30 AM" },
+      { name: "Vistara 312", time: "03:15 PM" },
+      { name: "IndiGo 451", time: "06:45 PM" }
+    ]
+  },
+  "New York (JFK) – John F. Kennedy International Airport": {
+    price: 70000,
+    flights: [
+      { name: "Air India 102", time: "09:15 AM" },
+      { name: "United 178", time: "01:45 PM" },
+      { name: "Emirates 203", time: "11:30 PM" }
+    ]
+  },
+  "Tokyo (HND) – Tokyo Haneda International Airport": {
+    price: 55000,
+    flights: [
+      { name: "Japan Airlines 555", time: "07:00 AM" },
+      { name: "Vistara 401", time: "12:40 PM" }
+    ]
+  },
+  "Dubai (DXB) – Dubai International Airport": {
+    price: 50000,
+    flights: [
+      { name: "Emirates 105", time: "05:30 AM" },
+      { name: "IndiGo 660", time: "02:15 PM" },
+      { name: "Air India 312", time: "08:00 PM" }
+    ]
+  },
+  "Singapore (SIN) – Changi International Airport": {
+    price: 48000,
+    flights: [
+      { name: "Singapore Airlines 232", time: "06:20 AM" },
+      { name: "IndiGo 490", time: "02:10 PM" }
+    ]
+  },
+  "London (LHR) – Heathrow Airport": {
+    price: 60000,
+    flights: [
+      { name: "British Airways 501", time: "10:00 AM" },
+      { name: "Air India 155", time: "04:15 PM" }
+    ]
+  },
+  "Sydney (SYD) – Kingsford Smith Airport": {
+    price: 65000,
+    flights: [
+      { name: "Qantas 700", time: "09:20 AM" },
+      { name: "Vistara 602", time: "11:45 PM" }
+    ]
+  },
+  "Bali (DPS) – Ngurah Rai International Airport": {
+    price: 40000,
+    flights: [
+      { name: "AirAsia 900", time: "05:15 AM" },
+      { name: "IndiGo 580", time: "03:30 PM" }
+    ]
+  }
+};
+
+function searchFlights() {
+  const from = document.getElementById("from").value;
+  const to = document.getElementById("to").value;
+  const date = document.getElementById("date").value;
+  const resultsDiv = document.getElementById("results");
+
+  if (!from || !to || !date) {
+    alert("Please select all fields before searching!");
+    return;
+  }
+
+  const destination = destinations[to];
+  if (!destination) {
+    resultsDiv.innerHTML = `<p style="color:white;">No flights available for the selected route.</p>`;
+    resultsDiv.style.display = "block";
+    return;
+  }
+
+  let html = `<h2 style="margin-bottom:15px; color:#fff;">Flights from ${from} → ${to}</h2>`;
+  destination.flights.forEach(flight => {
+    html += `
+      <div class="flight-card">
+        <div class="flight-info">
+          <h3><i class="fa-solid fa-plane"></i> ${flight.name}</h3>
+          <p>Date: ${date} | Time: ${flight.time}</p>
+        </div>
+        <div class="price">₹${destination.price.toLocaleString()}</div>
+        <a href="#"><button class="book-btn">Book Now</button></a>
+      </div>`;
+  });
+
+  resultsDiv.innerHTML = html;
+  resultsDiv.style.display = "block";
+  window.scrollTo({ top: resultsDiv.offsetTop - 50, behavior: "smooth" });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Store & Retrieve Flights</title>
+<style>
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  padding: 50px 20px;
+  margin: 0;
+}
+
+.container {
+  background: #fff;
+  width: 90%;
+  max-width: 1000px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  padding: 30px;
+}
+
+h2 {
+  text-align: center;
+  color: #1e3c72;
+  margin-bottom: 20px;
+}
+
+form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s;
+}
+
+input:focus {
+  border-color: #1e3c72;
+  box-shadow: 0 0 5px rgba(30, 60, 114, 0.3);
+}
+
+button {
+  grid-column: span 2;
+  padding: 12px;
+  background: linear-gradient(to right, #1e3c72, #2a5298);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: linear-gradient(to right, #2a5298, #1e3c72);
+}
+
+.table-container {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+th {
+  background: #1e3c72;
+  color: #fff;
+}
+
+tr:nth-child(even) {
+  background: #f2f2f2;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Store & Retrieve Flights</h2>
+
+  <!-- 🧾 User Input Form -->
+  <form id="flightForm">
+    <input type="text" id="flightId" placeholder="Flight ID" required>
+    <input type="text" id="flightName" placeholder="Flight Name" required>
+    <input type="text" id="source" placeholder="Source" required>
+    <input type="text" id="destination" placeholder="Destination" required>
+    <input type="number" id="price" placeholder="Price (₹)" required>
+    <button type="submit">Add Flight</button>
+  </form>
+
+  <!-- 📋 Flight Table -->
+  <div class="table-container">
+    <h3 style="text-align:center;color:#1e3c72;">Stored Flight Details</h3>
+    <table id="flightTable">
+      <tr>
+        <th>Flight ID</th>
+        <th>Flight Name</th>
+        <th>Source</th>
+        <th>Destination</th>
+        <th>Price</th>
+      </tr>
+      <tr>
+        <td>F101</td>
+        <td>Air India 203</td>
+        <td>Delhi</td>
+        <td>Mumbai</td>
+        <td>₹7,500</td>
+      </tr>
+      <tr>
+        <td>F102</td>
+        <td>Emirates 501</td>
+        <td>Chennai</td>
+        <td>Dubai</td>
+        <td>₹28,000</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<script>
+document.getElementById("flightForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const flightId = document.getElementById("flightId").value;
+  const flightName = document.getElementById("flightName").value;
+  const source = document.getElementById("source").value;
+  const destination = document.getElementById("destination").value;
+  const price = document.getElementById("price").value;
+
+  if (flightId && flightName && source && destination && price) {
+    const table = document.getElementById("flightTable");
+    const newRow = table.insertRow(-1);
+
+    newRow.insertCell(0).innerText = flightId;
+    newRow.insertCell(1).innerText = flightName;
+    newRow.insertCell(2).innerText = source;
+    newRow.insertCell(3).innerText = destination;
+    newRow.insertCell(4).innerText = "₹" + Number(price).toLocaleString();
+
+    // Reset form
+    this.reset();
+  }
+});
+</script>
+
+</body>
+</html>
